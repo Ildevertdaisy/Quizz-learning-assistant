@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Application de Flashcards</title>
+  <style>
+    /* === RESET RAPIDE === */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Ajout d'un style pour notre compteur */
+    .flashcard-count {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    /* === CONTENEUR PRINCIPAL === */
+    .flashcard-container {
+      perspective: 1000px; /* Nécessaire pour l'effet 3D */
+      width: 300px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+
+    /* === CARTE ET EFFET DE ROTATION === */
+    .flashcard {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      cursor: pointer;
+    }
+
+    /* Styles communs pour la face avant et la face arrière */
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden; /* Permet de masquer la face arrière lors de la rotation */
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .front {
+      background: #42a5f5; /* Bleu clair */
+    }
+
+    .back {
+      background: lightgreen; /* Rouge clair */
+      transform: rotateY(180deg);
+    }
+
+    /* Lorsque la carte est "retournée" */
+    .flip {
+      transform: rotateY(180deg);
+    }
+
+    /* === BOUTONS SUIVANT / PRECEDENT === */
+    .navigation {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #1976d2;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Mes Flashcards</h1>
+  
+  <!-- Ajout du compteur -->
+  <div class="flashcard-count" id="flashcardCount"></div>
+
+  <div class="flashcard-container">
+    <!-- Conteneur de la carte -->
+    <div class="flashcard" id="flashcard">
+      <!-- Face avant (Question) -->
+      <div class="card-face front" id="card-front"></div>
+      <!-- Face arrière (Réponse) -->
+      <div class="card-face back" id="card-back"></div>
+    </div>
+  </div>
+
+  <!-- Navigation pour se déplacer entre les flashcards -->
+  <div class="navigation">
+    <button id="prevBtn">Précédent</button>
+    <button id="nextBtn">Suivant</button>
+  </div>
+
+  <!-- Bouton pour charger un fichier JSON depuis l'ordinateur -->
+  <button id="readFileBtn">Lire un fichier JSON</button>
+
+  <script>
+    // === 1. Données par défaut de nos flashcards (personnalisables) ===
+    let flashcardsData = [
+      {
+        question: "1) Quelle est la capitale de la France ?",
+        answer: "Paris"
+      },
+      {
+        question: "2) Quelle est la couleur du ciel par beau temps ?",
+        answer: "Bleu"
+      },
+      {
+        question: "3) Combien font 1 + 1 ?",
+        answer: "2"
+      },
+      {
+        question: "4) Qui a peint la Joconde ?",
+        answer: "Léonard de Vinci"
+      }
+    ];
+
+    // Indice de la carte actuelle
+    let currentIndex = 0;
+    // Indique si la carte est retournée (question vs. réponse)
+    let isFlipped = false;
+
+    // Récupération des éléments HTML
+    const flashcardEl = document.getElementById("flashcard");
+    const cardFrontEl = document.getElementById("card-front");
+    const cardBackEl = document.getElementById("card-back");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const flashcardCountEl = document.getElementById("flashcardCount");
+    const readFileBtn = document.getElementById("readFileBtn");
+
+    // Fonction d'affichage de la flashcard courante
+    function displayFlashcard(index) {
+      const { question, answer } = flashcardsData[index];
+      cardFrontEl.textContent = question;
+      cardBackEl.textContent = answer;
+
+      // Mise à jour du compteur ex: "1/4"
+      flashcardCountEl.textContent = `${index + 1} / ${flashcardsData.length}`;
+
+      // Mise à jour de l'état des boutons
+      prevBtn.disabled = (index === 0);
+      nextBtn.disabled = (index === flashcardsData.length - 1);
+    }
+
+    // Au clic sur la carte, la faire pivoter
+    flashcardEl.addEventListener('click', () => {
+      isFlipped = !isFlipped;
+      flashcardEl.classList.toggle('flip', isFlipped);
+    });
+
+    // Bouton "Suivant"
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < flashcardsData.length - 1) {
+        currentIndex++;
+        isFlipped = false;
+        flashcardEl.classList.remove('flip');
+        displayFlashcard(currentIndex);
+      }
+    });
+
+    // Bouton "Précédent"
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        isFlipped = false;
+        flashcardEl.classList.remove('flip');
+        displayFlashcard(currentIndex);
+      }
+    });
+
+    // === 2. Fonction de lecture d'un fichier JSON depuis l'ordinateur ===
+    readFileBtn.addEventListener('click', async () => {
+      try {
+        // Ouvrir le sélecteur de fichiers
+        const fileHandles = await window.showOpenFilePicker({
+          // Filtre optionnel, pour limiter au JSON
+          types: [
+            {
+              description: "Fichiers JSON",
+              accept: {
+                "application/json": [".json"]
+              }
+            }
+          ],
+          multiple: false // On limite à un seul fichier
+        });
+
+        if (!fileHandles || fileHandles.length === 0) {
+          return;
+        }
+
+        const fileHandle = fileHandles[0];
+        const file = await fileHandle.getFile();
+        const fileContent = await file.text();
+
+        // Parsing du JSON
+        const parsedData = JSON.parse(fileContent);
+
+        // On vérifie que parsedData est un tableau d'objets
+        if (Array.isArray(parsedData) && parsedData.length > 0) {
+          // On met à jour notre tableau flashcardsData
+          flashcardsData = parsedData;
+          // On réinitialise l'index
+          currentIndex = 0;
+          // On affiche la première flashcard
+          isFlipped = false;
+          flashcardEl.classList.remove('flip');
+          displayFlashcard(currentIndex);
+        } else {
+          alert("Le fichier JSON ne contient pas un tableau valide de flashcards.");
+        }
+
+      } catch (error) {
+        console.error(error);
+        alert("Une erreur est survenue lors de la lecture du fichier.");
+      }
+    });
+
+    // Initialisation : affichage de la première flashcard
+    displayFlashcard(currentIndex);
+  </script>
+</body>
+</html>

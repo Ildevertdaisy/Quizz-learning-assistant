@@ -1,0 +1,191 @@
+[
+  {
+    "question": "1. Avant d'utiliser Pygame, qu'est-ce que les jeux utilisaient pour s'afficher ?",
+    "answers": [
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      },
+      {
+        "text": "Du texte seulement.",
+        "correct": true
+      },
+      {
+        "text": "Pour apprendre à coder.",
+        "correct": false
+      },
+      {
+        "text": "Pour rendre le jeu plus amusant.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "2. Qu'est-ce qu'on voit sur l'écran dans les jeux qui utilisent seulement du texte ?",
+    "answers": [
+      {
+        "text": "Des mots et des phrases.",
+        "correct": true
+      },
+      {
+        "text": "Pour apprendre à coder.",
+        "correct": false
+      },
+      {
+        "text": "Pour rendre le jeu plus amusant.",
+        "correct": false
+      },
+      {
+        "text": "Du texte seulement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "3. Comment les joueurs participaient-ils à ces jeux textuels ?",
+    "answers": [
+      {
+        "text": "Du texte seulement.",
+        "correct": false
+      },
+      {
+        "text": "En tapant avec un clavier.",
+        "correct": true
+      },
+      {
+        "text": "Des mots et des phrases.",
+        "correct": false
+      },
+      {
+        "text": "Ajouter des images et des dessins.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "4. Pourquoi les jeux avec seulement du texte sont-ils utiles au début ?",
+    "answers": [
+      {
+        "text": "En tapant avec un clavier.",
+        "correct": false
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      },
+      {
+        "text": "Pour apprendre à coder.",
+        "correct": true
+      },
+      {
+        "text": "Ajouter des images et des dessins.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "5. Quel est le problème des jeux qui ont seulement du texte ?",
+    "answers": [
+      {
+        "text": "Du texte seulement.",
+        "correct": false
+      },
+      {
+        "text": "Pour apprendre à coder.",
+        "correct": false
+      },
+      {
+        "text": "Pygame.",
+        "correct": false
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "6. Quel outil peut rendre les jeux plus intéressants avec des graphismes ?",
+    "answers": [
+      {
+        "text": "Pygame.",
+        "correct": true
+      },
+      {
+        "text": "Pour rendre le jeu plus amusant.",
+        "correct": false
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      },
+      {
+        "text": "Ajouter des images et des dessins.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "7. Que permet de faire Pygame dans un jeu ?",
+    "answers": [
+      {
+        "text": "Ajouter des images et des dessins.",
+        "correct": true
+      },
+      {
+        "text": "Pour rendre le jeu plus amusant.",
+        "correct": false
+      },
+      {
+        "text": "Pygame.",
+        "correct": false
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "8. Pourquoi est-ce mieux d'avoir des graphismes dans un jeu ?",
+    "answers": [
+      {
+        "text": "Pour rendre le jeu plus amusant.",
+        "correct": true
+      },
+      {
+        "text": "Du texte seulement.",
+        "correct": false
+      },
+      {
+        "text": "Pygame.",
+        "correct": false
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "9. Comment s’appelle l’outil présenté dans ce texte ?",
+    "answers": [
+      {
+        "text": "En tapant avec un clavier.",
+        "correct": false
+      },
+      {
+        "text": "Ajouter des images et des dessins.",
+        "correct": false
+      },
+      {
+        "text": "Pygame.",
+        "correct": true
+      },
+      {
+        "text": "Ils deviennent vite ennuyeux.",
+        "correct": false
+      }
+    ]
+  }
+]

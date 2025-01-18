@@ -1,0 +1,30 @@
+[
+  {
+    "question": "1. Quelle est la première qualité principale de Wasm mentionnée dans le texte ? ",
+    "answer": " La performance (rapidité)."
+  },
+  {
+    "question": "2. À quoi est comparé Wasm pour montrer sa rapidité ? ",
+    "answer": " À un super-héros de la vitesse."
+  },
+  {
+    "question": "3. Pourquoi la rapidité de Wasm est-elle importante pour les applications ? ",
+    "answer": " Parce qu'elle permet de faire des calculs très rapides."
+  },
+  {
+    "question": "4. Quel exemple est donné pour montrer comment Wasm utilise sa rapidité ? ",
+    "answer": " Recommander des chansons ou analyser une grande base de données."
+  },
+  {
+    "question": "5. À quoi sert Wasm lorsqu'une application a besoin de traiter beaucoup d'informations ? ",
+    "answer": " À accomplir les tâches rapidement et efficacement."
+  },
+  {
+    "question": "6. Quelle tâche Wasm peut-il faire en un éclair, selon le texte ? ",
+    "answer": " Analyser une grande base de données pour une liste de tâches."
+  },
+  {
+    "question": "7. Quel est le message principal du texte sur la performance de Wasm ? ",
+    "answer": " Wasm est extrêmement rapide, ce qui le rend idéal pour des tâches exigeantes en calcul."
+  }
+]

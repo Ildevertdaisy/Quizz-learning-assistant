@@ -1,0 +1,191 @@
+[
+  {
+    "question": "1. Quand tu joues à un jeu vidéo en ligne, pourquoi voudrais-tu parfois parler avec tes amis en temps réel ?",
+    "answers": [
+      {
+        "text": "Comprendre les WebSockets et FastAPI.",
+        "correct": false
+      },
+      {
+        "text": "Pour partager infos et réagir vite.",
+        "correct": true
+      },
+      {
+        "text": "Ordinateur ou téléphone.",
+        "correct": false
+      },
+      {
+        "text": "FastAPI.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "2. Pourquoi aimerais-tu recevoir des notifications immédiatement pendant ta partie ?",
+    "answers": [
+      {
+        "text": "Comprendre les WebSockets et FastAPI.",
+        "correct": false
+      },
+      {
+        "text": "Tu reçois tout sans attendre.",
+        "correct": false
+      },
+      {
+        "text": "D’une conversation constante.",
+        "correct": false
+      },
+      {
+        "text": "Pour ne rien manquer d’important.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "3. De quoi ton application a-t-elle besoin pour échanger en continu avec le serveur ?",
+    "answers": [
+      {
+        "text": "FastAPI.",
+        "correct": false
+      },
+      {
+        "text": "D’une conversation constante.",
+        "correct": true
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      },
+      {
+        "text": "Tu reçois tout sans attendre.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "4. Quel nom donne-t-on à cette « conversation » spéciale entre ton appareil et le serveur ?",
+    "answers": [
+      {
+        "text": "WebSocket.",
+        "correct": true
+      },
+      {
+        "text": "FastAPI.",
+        "correct": false
+      },
+      {
+        "text": "Pour ne rien manquer d’important.",
+        "correct": false
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "5. À quoi servent les WebSockets dans un jeu en ligne ?",
+    "answers": [
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": true
+      },
+      {
+        "text": "Pour partager infos et réagir vite.",
+        "correct": false
+      },
+      {
+        "text": "Tu reçois tout sans attendre.",
+        "correct": false
+      },
+      {
+        "text": "D’une conversation constante.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "6. Quel est l’avantage d’avoir une communication en temps réel ?",
+    "answers": [
+      {
+        "text": "Tu reçois tout sans attendre.",
+        "correct": true
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      },
+      {
+        "text": "Ordinateur ou téléphone.",
+        "correct": false
+      },
+      {
+        "text": "Pour ne rien manquer d’important.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "7. Comment s’intitule le texte qui parle de cette technologie ?",
+    "answers": [
+      {
+        "text": "Pour partager infos et réagir vite.",
+        "correct": false
+      },
+      {
+        "text": "WebSocket.",
+        "correct": false
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      },
+      {
+        "text": "Comprendre les WebSockets et FastAPI.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "8. Quel autre outil est mentionné avec les WebSockets dans ce titre ?",
+    "answers": [
+      {
+        "text": "FastAPI.",
+        "correct": true
+      },
+      {
+        "text": "Pour ne rien manquer d’important.",
+        "correct": false
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      },
+      {
+        "text": "Comprendre les WebSockets et FastAPI.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "9.Quels sont les appareils mentionnés pour jouer ou communiquer ?",
+    "answers": [
+      {
+        "text": "Comprendre les WebSockets et FastAPI.",
+        "correct": false
+      },
+      {
+        "text": "Elles assurent un échange instantané.",
+        "correct": false
+      },
+      {
+        "text": "Ordinateur ou téléphone.",
+        "correct": true
+      },
+      {
+        "text": "Pour partager infos et réagir vite.",
+        "correct": false
+      }
+    ]
+  }
+]

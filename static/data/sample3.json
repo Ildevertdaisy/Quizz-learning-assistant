@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Which is the largest animal in the world?",
+    "answers": [
+      { "text": "Shark", "correct": false },
+      { "text": "Blue whale", "correct": true },
+      { "text": "Elephant", "correct": false },
+      { "text": "Giraffe", "correct": false }
+    ]
+  },
+  {
+    "question": "Quel langage est souvent utilisé pour le backend ?",
+    "answers": [
+      { "text": "C++", "correct": false },
+      { "text": "JavaScript (Node.js)", "correct": true },
+      { "text": "HTML", "correct": false },
+      { "text": "CSS", "correct": false }
+    ]
+  }
+]
+
+
