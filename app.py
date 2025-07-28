@@ -8,6 +8,7 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+
 @app.route("/mcq")
 def get_mcq_screen():
     return render_template("mcq_3.html")

@@ -1,0 +1,170 @@
+[
+  {
+    "question": "1. Pourquoi une application de streaming musical a-t-elle besoin d’une base de données ?",
+    "answers": [
+      {
+        "text": "Elle stocke beaucoup de données variées.",
+        "correct": false
+      },
+      {
+        "text": "Pour stocker chansons, playlists et découvertes.",
+        "correct": true
+      },
+      {
+        "text": "Python.",
+        "correct": false
+      },
+      {
+        "text": "Ranger et retrouver les infos facilement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "2. À quoi peut-on comparer une base de données pour mieux comprendre son rôle ?",
+    "answers": [
+      {
+        "text": "Une base de données NoSQL.",
+        "correct": false
+      },
+      {
+        "text": "Motor.",
+        "correct": false
+      },
+      {
+        "text": "À un grand classeur numérique.",
+        "correct": true
+      },
+      {
+        "text": "Python.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "3. Quel type de base de données est souvent utilisé pour des applications modernes ?",
+    "answers": [
+      {
+        "text": "Python.",
+        "correct": false
+      },
+      {
+        "text": "Une base de données NoSQL.",
+        "correct": true
+      },
+      {
+        "text": "Motor.",
+        "correct": false
+      },
+      {
+        "text": "Elle stocke beaucoup de données variées.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "4. Pourquoi choisir une base de données NoSQL pour une application musicale ?",
+    "answers": [
+      {
+        "text": "Elle stocke beaucoup de données variées.",
+        "correct": true
+      },
+      {
+        "text": "`pip install motor`",
+        "correct": false
+      },
+      {
+        "text": "Ranger et retrouver les infos facilement.",
+        "correct": false
+      },
+      {
+        "text": "À un grand classeur numérique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "5. Quel langage est utilisé avec FastAPI pour interagir avec une base NoSQL ?",
+    "answers": [
+      {
+        "text": "Python.",
+        "correct": true
+      },
+      {
+        "text": "Une base de données NoSQL.",
+        "correct": false
+      },
+      {
+        "text": "Motor.",
+        "correct": false
+      },
+      {
+        "text": "Pour stocker chansons, playlists et découvertes.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "6. Quelle bibliothèque Python permet d’utiliser FastAPI avec une base NoSQL ?",
+    "answers": [
+      {
+        "text": "À un grand classeur numérique.",
+        "correct": false
+      },
+      {
+        "text": "Elle stocke beaucoup de données variées.",
+        "correct": false
+      },
+      {
+        "text": "Motor.",
+        "correct": true
+      },
+      {
+        "text": "Python.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "7. Quelle commande installe Motor pour utiliser MongoDB avec FastAPI ?",
+    "answers": [
+      {
+        "text": "Elle stocke beaucoup de données variées.",
+        "correct": false
+      },
+      {
+        "text": "À un grand classeur numérique.",
+        "correct": false
+      },
+      {
+        "text": "`pip install motor`",
+        "correct": true
+      },
+      {
+        "text": "Pour stocker chansons, playlists et découvertes.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "8. Quel est l’objectif principal d’une base de données dans une appli musicale ?",
+    "answers": [
+      {
+        "text": "À un grand classeur numérique.",
+        "correct": false
+      },
+      {
+        "text": "`pip install motor`",
+        "correct": false
+      },
+      {
+        "text": "Une base de données NoSQL.",
+        "correct": false
+      },
+      {
+        "text": "Ranger et retrouver les infos facilement.",
+        "correct": true
+      }
+    ]
+  }
+]

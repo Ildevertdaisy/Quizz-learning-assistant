@@ -1,0 +1,212 @@
+[
+  {
+    "question": "1. **Pourquoi Celery est-il comparé à un assistant invisible ? 🧑‍💻**",
+    "answers": [
+      {
+        "text": "Il envoie des tâches.",
+        "correct": false
+      },
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      },
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": false
+      },
+      {
+        "text": "Il aide sans qu'on le voie.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "2. **Quel est le rôle principal de Celery dans une application ? ⚙️**",
+    "answers": [
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      },
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": true
+      },
+      {
+        "text": "Il exécute les tâches.",
+        "correct": false
+      },
+      {
+        "text": "Il aide sans qu'on le voie.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "3. **Pourquoi Celery permet-il de ne pas tout faire d’un coup ? ⏳**",
+    "answers": [
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": false
+      },
+      {
+        "text": "Il gère les tâches séparément.",
+        "correct": true
+      },
+      {
+        "text": "Il exécute les tâches.",
+        "correct": false
+      },
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "4. **Quel concept important Celery utilise-t-il pour organiser les tâches ? 📦**",
+    "answers": [
+      {
+        "text": "Les files de tâches.",
+        "correct": true
+      },
+      {
+        "text": "Il gère les tâches efficacement.",
+        "correct": false
+      },
+      {
+        "text": "Il gère les tâches séparément.",
+        "correct": false
+      },
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "5. **Comment s’appelle le système qui fait fonctionner les files de tâches ? 🔄**",
+    "answers": [
+      {
+        "text": "Il gère les tâches séparément.",
+        "correct": false
+      },
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": false
+      },
+      {
+        "text": "Producteur et consommateur.",
+        "correct": true
+      },
+      {
+        "text": "Il est expliqué simplement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "6. **Pourquoi ne faut-il pas paniquer en apprenant Celery ? 😊**",
+    "answers": [
+      {
+        "text": "Il est expliqué simplement.",
+        "correct": true
+      },
+      {
+        "text": "Producteur et consommateur.",
+        "correct": false
+      },
+      {
+        "text": "Les files de tâches.",
+        "correct": false
+      },
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "7. **Comment les files de tâches aident-elles ton application ? 🚀**",
+    "answers": [
+      {
+        "text": "Il aide sans qu'on le voie.",
+        "correct": false
+      },
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": true
+      },
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": false
+      },
+      {
+        "text": "Il gère les tâches efficacement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "8. **Que fait le producteur dans Celery ? 🏗️**",
+    "answers": [
+      {
+        "text": "Elles évitent de tout faire d'un coup.",
+        "correct": false
+      },
+      {
+        "text": "Producteur et consommateur.",
+        "correct": false
+      },
+      {
+        "text": "Il envoie des tâches.",
+        "correct": true
+      },
+      {
+        "text": "Il est expliqué simplement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "9. **Que fait le consommateur dans Celery ? 🍽️**",
+    "answers": [
+      {
+        "text": "Il exécute les tâches.",
+        "correct": true
+      },
+      {
+        "text": "Il envoie des tâches.",
+        "correct": false
+      },
+      {
+        "text": "Il gère les tâches séparément.",
+        "correct": false
+      },
+      {
+        "text": "Il est expliqué simplement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "10. **Pourquoi Celery fait-il gagner du temps ? ⏰**",
+    "answers": [
+      {
+        "text": "Accomplir des tâches automatiquement.",
+        "correct": false
+      },
+      {
+        "text": "Producteur et consommateur.",
+        "correct": false
+      },
+      {
+        "text": "Il gère les tâches efficacement.",
+        "correct": true
+      },
+      {
+        "text": "Il exécute les tâches.",
+        "correct": false
+      }
+    ]
+  }
+]
