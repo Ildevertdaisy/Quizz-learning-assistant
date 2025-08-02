@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Quiz (typing, format answers[])</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #333;
+    }
+    .quiz-container {
+      background: #fff;
+      width: 600px;
+      max-width: 90%;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .question-counter {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1rem;
+      color: #666;
+      background: #f0f4f8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .question-header {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      color: #555;
+      text-align: left;
+      padding-right: 80px;
+    }
+    .input-container {
+      margin-bottom: 15px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus {
+      border: 1.5px solid #1976d2;
+      outline: none;
+      background: #f0f6ff;
+    }
+    .dont-know-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      background-color: #e0e0e0;
+      color: #333;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 2px;
+      margin-left: 0;
+      min-width: 110px;
+      transition: background 0.2s;
+    }
+    .dont-know-btn:disabled {
+      background-color: #ededed;
+      color: #aaa;
+      cursor: default;
+    }
+    .dont-know-btn:hover:enabled {
+      background-color: #cccccc;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-bottom: 12px;
+      min-height: 24px;
+      display: block;
+    }
+    .feedback.correct-text { color: #2e7d32; }
+    .feedback.incorrect-text { color: #c62828; }
+    .feedback.almost-text { color: #f57c00; }
+    .correct-answer {
+      color: #1976d2;
+      background: #e8f0fe;
+      border: 1px dashed #1976d2;
+      border-radius: 7px;
+      margin: 10px 0 0 0;
+      padding: 8px 12px;
+      font-size: 1rem;
+      display: inline-block;
+      font-weight: 500;
+    }
+    .correct-answer .diff-highlight {
+      background-color: #ffeb3b;
+      font-weight: bold;
+      padding: 1px 3px;
+      border-radius: 3px;
+      margin: 0 1px;
+    }
+    .next-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      background-color: #1976d2;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      min-width: 110px;
+      transition: background 0.2s;
+    }
+    .next-btn:hover {
+      background-color: #1565c0;
+    }
+    .file-input { margin-bottom: 15px; }
+    @media (max-width: 600px) {
+      .quiz-container { padding: 10px; }
+      .question-header { font-size: 1rem; }
+      input[type="text"] { font-size: 0.98rem; }
+      .next-btn, .dont-know-btn { font-size: 0.96rem; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz</h1>
+  <div class="quiz-container">
+    <div class="question-counter" id="question-counter"></div>
+    <div id="question" class="question-header"></div>
+    <div class="input-container">
+      <input type="text" id="user-answer" placeholder="Taper la réponse exacte" autocomplete="off" />
+      <button id="dont-know-btn" class="dont-know-btn" type="button">Je ne sais pas</button>
+    </div>
+    <div id="feedback" class="feedback"></div>
+    <div id="correction"></div>
+    <button id="next-btn" class="next-btn">Suivant</button>
+  </div>
+  <input type="file" id="fileInput" class="file-input" accept=".json" />
+
+  <script>
+    // SONS de réussite et d'échec
+    let successAudio = new Audio("/static/sounds/win.mp3");
+    let failedAudio = new Audio("/static/sounds/failed.mp3");
+
+    let questions = [
+      {
+        "question": "3. **Quand une appli comprend ce que tu dis et t'aide, que doit-elle avoir dedans 🧠📱 ?**",
+        "answers": [
+          { "text": "L'Agents SDK d'OpenAI 🚀.", "correct": false },
+          { "text": "Un outil pour créer des applis intelligentes 🧰✨.", "correct": false },
+          { "text": "À la rendre intelligente comme un cerveau 🧠🤖.", "correct": false },
+          { "text": "Un cerveau intelligent 🧠💡.", "correct": true }
+        ]
+      },
+      {
+        "question": "4. **Qui apporte ce cerveau malin à ton application 🤖📲 ?**",
+        "answers": [
+          { "text": "L'Agents SDK d'OpenAI 🚀.", "correct": true },
+          { "text": "Un outil pour créer des applis intelligentes 🧰✨.", "correct": false },
+          { "text": "Un cerveau intelligent 🧠💡.", "correct": false },
+          { "text": "À la rendre intelligente comme un cerveau 🧠🤖.", "correct": false }
+        ]
+      },
+      {
+        "question": "5. **C'est quoi l'Agents SDK d'OpenAI exactement 🛠️🧠 ?**",
+        "answers": [
+          { "text": "Un outil pour créer des applis intelligentes 🧰✨.", "correct": true },
+          { "text": "Un cerveau intelligent 🧠💡.", "correct": false },
+          { "text": "L'Agents SDK d'OpenAI 🚀.", "correct": false },
+          { "text": "À la rendre intelligente comme un cerveau 🧠🤖.", "correct": false }
+        ]
+      },
+      {
+        "question": "6. **À quoi sert l'Agents SDK dans une appli 👩‍🍳📅 ?**",
+        "answers": [
+          { "text": "L'Agents SDK d'OpenAI 🚀.", "correct": false },
+          { "text": "Un outil pour créer des applis intelligentes 🧰✨.", "correct": false },
+          { "text": "À la rendre intelligente comme un cerveau 🧠🤖.", "correct": true },
+          { "text": "Un cerveau intelligent 🧠💡.", "correct": false }
+        ]
+      }
+    ];
+
+    const questionElement = document.getElementById("question");
+    const feedbackElement = document.getElementById("feedback");
+    const correctionElement = document.getElementById("correction");
+    const answerInput = document.getElementById("user-answer");
+    const dontKnowBtn = document.getElementById("dont-know-btn");
+    const nextButton = document.getElementById("next-btn");
+    const fileInput = document.getElementById("fileInput");
+    const questionCounter = document.getElementById("question-counter");
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let hasAnswered = false;
+
+    function resetState() {
+      feedbackElement.textContent = "";
+      feedbackElement.className = "feedback";
+      correctionElement.textContent = "";
+      correctionElement.innerHTML = "";
+      answerInput.value = "";
+      answerInput.disabled = false;
+      dontKnowBtn.disabled = false;
+      hasAnswered = false;
+      nextButton.style.display = "inline-block";
+    }
+
+    function showQuestion() {
+      resetState();
+      answerInput.style.display = "block";
+      dontKnowBtn.style.display = "inline-block";
+      answerInput.focus();
+      const currentQ = questions[currentQuestionIndex];
+      questionElement.innerHTML = currentQ.question;
+      questionCounter.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+    }
+
+    function sanitize(s) {
+      // Lowercase, trim, remove accents and punctuation for fair comparison
+      return s.trim().toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // accents
+        .replace(/[.?!…]/g, "") // ponctuation finale
+        .replace(/\s+/g, " ");  // espaces multiples
+    }
+
+    function getCorrectAnswers(q) {
+      // On retourne tous les .text où correct==true (en général un seul)
+      return q.answers.filter(ans => ans.correct).map(ans => ans.text);
+    }
+
+    // Calcul de la distance de Levenshtein
+    function levenshteinDistance(str1, str2) {
+      const m = str1.length;
+      const n = str2.length;
+      const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (str1[i - 1] === str2[j - 1]) {
+            dp[i][j] = dp[i - 1][j - 1];
+          } else {
+            dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+          }
+        }
+      }
+      return dp[m][n];
+    }
+
+    // Calcul du pourcentage de similarité
+    function calculateSimilarity(str1, str2) {
+      const distance = levenshteinDistance(str1, str2);
+      const maxLength = Math.max(str1.length, str2.length);
+      if (maxLength === 0) return 100;
+      return ((maxLength - distance) / maxLength) * 100;
+    }
+
+    // Fonction améliorée pour la mise en évidence des différences
+    function highlightDifferences(userAnswer, correctAnswer) {
+      const userNorm = sanitize(userAnswer);
+      const correctNorm = sanitize(correctAnswer);
+      
+      // Si les réponses sont identiques après normalisation
+      if (userNorm === correctNorm) {
+        return correctAnswer;
+      }
+
+      // Algorithme de programmation dynamique pour trouver l'alignement optimal
+      const m = userNorm.length;
+      const n = correctNorm.length;
+      const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+      
+      // Initialisation
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      
+      // Remplissage de la matrice
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (userNorm[i - 1] === correctNorm[j - 1]) {
+            dp[i][j] = dp[i - 1][j - 1];
+          } else {
+            dp[i][j] = 1 + Math.min(
+              dp[i - 1][j],     // deletion
+              dp[i][j - 1],     // insertion
+              dp[i - 1][j - 1]  // substitution
+            );
+          }
+        }
+      }
+
+      // Reconstruction du chemin optimal pour identifier les différences
+      let i = m, j = n;
+      const operations = [];
+      
+      while (i > 0 || j > 0) {
+        if (i > 0 && j > 0 && userNorm[i - 1] === correctNorm[j - 1]) {
+          operations.push({ type: 'match', correctIndex: j - 1 });
+          i--;
+          j--;
+        } else if (j > 0 && (i === 0 || dp[i][j - 1] <= dp[i - 1][j])) {
+          operations.push({ type: 'insert', correctIndex: j - 1 });
+          j--;
+        } else if (i > 0 && (j === 0 || dp[i - 1][j] < dp[i][j - 1])) {
+          operations.push({ type: 'delete' });
+          i--;
+        } else {
+          operations.push({ type: 'substitute', correctIndex: j - 1 });
+          i--;
+          j--;
+        }
+      }
+      
+      operations.reverse();
+
+      // Construction du résultat avec mise en évidence
+      let result = '';
+      let inHighlight = false;
+      let consecutiveDiffs = 0;
+      
+      for (let k = 0; k < operations.length; k++) {
+        const op = operations[k];
+        const isCurrentDiff = op.type !== 'match';
+        const nextOp = operations[k + 1];
+        const isNextDiff = nextOp && nextOp.type !== 'match';
+        
+        if (op.type === 'match' || op.type === 'insert' || op.type === 'substitute') {
+          const char = correctAnswer[op.correctIndex] || correctNorm[op.correctIndex];
+          
+          if (isCurrentDiff && !inHighlight) {
+            result += '<span class="diff-highlight">';
+            inHighlight = true;
+            consecutiveDiffs = 1;
+          } else if (isCurrentDiff && inHighlight) {
+            consecutiveDiffs++;
+          } else if (!isCurrentDiff && inHighlight) {
+            result += '</span>';
+            inHighlight = false;
+            consecutiveDiffs = 0;
+          }
+          
+          // Fermer le highlight si on a plusieurs différences consécutives
+          // et que la prochaine opération n'est pas une différence
+          if (inHighlight && !isNextDiff && consecutiveDiffs >= 1) {
+            result += char + '</span>';
+            inHighlight = false;
+            consecutiveDiffs = 0;
+          } else {
+            result += char;
+          }
+        }
+      }
+      
+      // Fermer le highlight s'il reste ouvert
+      if (inHighlight) {
+        result += '</span>';
+      }
+
+      return result;
+    }
+
+    function checkAnswer(forceWrong = false) {
+      if (hasAnswered) return;
+      hasAnswered = true;
+      answerInput.disabled = true;
+      dontKnowBtn.disabled = true;
+
+      const userAnswer = answerInput.value.trim();
+      const userAnswerSanitized = sanitize(userAnswer);
+      const currentQ = questions[currentQuestionIndex];
+      const correctAnswers = getCorrectAnswers(currentQ);
+
+      let isExactMatch = false;
+      let bestMatch = null;
+      let bestSimilarity = 0;
+
+      // Vérifier les correspondances
+      for (let correctAnswer of correctAnswers) {
+        const correctSanitized = sanitize(correctAnswer);
+        
+        if (userAnswerSanitized === correctSanitized) {
+          isExactMatch = true;
+          bestMatch = correctAnswer;
+          bestSimilarity = 100;
+          break;
+        }
+        
+        const similarity = calculateSimilarity(userAnswerSanitized, correctSanitized);
+        if (similarity > bestSimilarity) {
+          bestSimilarity = similarity;
+          bestMatch = correctAnswer;
+        }
+      }
+
+      const threshold = 80; // Seuil de similarité pour considérer la réponse comme "presque correcte"
+
+      if (forceWrong) {
+        feedbackElement.textContent = "Je ne sais pas";
+        feedbackElement.classList.add("incorrect-text");
+        correctionElement.innerHTML = '<span class="correct-answer">Bonne réponse&nbsp;: ' + correctAnswers[0] + '</span>';
+        try { failedAudio.currentTime = 0; failedAudio.play(); } catch(e){}
+      } else if (isExactMatch) {
+        feedbackElement.textContent = "Bonne réponse !";
+        feedbackElement.classList.add("correct-text");
+        score++;
+        try { successAudio.currentTime = 0; successAudio.play(); } catch(e){}
+      } else if (bestSimilarity >= threshold) {
+        feedbackElement.textContent = `Presque ! (${Math.round(bestSimilarity)}% de similarité)`;
+        feedbackElement.classList.add("almost-text");
+        const highlightedAnswer = highlightDifferences(userAnswer, bestMatch);
+        correctionElement.innerHTML = '<span class="correct-answer">Bonne réponse&nbsp;: ' + highlightedAnswer + '</span>';
+        score += 0.5; // Demi-point pour une réponse presque correcte
+        try { successAudio.currentTime = 0; successAudio.play(); } catch(e){}
+      } else {
+        feedbackElement.textContent = "Oups... Mauvaise réponse !";
+        feedbackElement.classList.add("incorrect-text");
+        correctionElement.innerHTML = '<span class="correct-answer">Bonne réponse&nbsp;: ' + correctAnswers[0] + '</span>';
+        try { failedAudio.currentTime = 0; failedAudio.play(); } catch(e){}
+      }
+    }
+
+    function showScore() {
+      questionElement.innerHTML = `Vous avez obtenu ${score} point(s) sur ${questions.length}.`;
+      feedbackElement.textContent = "";
+      correctionElement.textContent = "";
+      answerInput.style.display = "none";
+      dontKnowBtn.style.display = "none";
+      nextButton.innerHTML = "Recommencer";
+      nextButton.style.display = "inline-block";
+      questionCounter.style.display = "none";
+    }
+
+    nextButton.addEventListener("click", () => {
+      if (nextButton.innerHTML === "Recommencer") {
+        startQuiz();
+        return;
+      }
+      if (!hasAnswered) {
+        checkAnswer();
+        return;
+      }
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showScore();
+      }
+    });
+
+    answerInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        checkAnswer();
+      }
+    });
+
+    dontKnowBtn.addEventListener("click", function() {
+      checkAnswer(true); // Corrige comme mauvaise réponse
+    });
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      answerInput.style.display = "block";
+      dontKnowBtn.style.display = "inline-block";
+      nextButton.innerHTML = "Suivant";
+      questionCounter.style.display = "block";
+      showQuestion();
+    }
+
+    startQuiz();
+
+    // Import du JSON dans le format answers[]
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (!file.name.toLowerCase().endsWith('.json')) {
+        alert("Veuillez sélectionner un fichier .json !");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const fileContent = event.target.result;
+          const parsedData = JSON.parse(fileContent);
+          if (Array.isArray(parsedData) && parsedData.length > 0 && parsedData[0].question && parsedData[0].answers) {
+            questions = parsedData;
+            startQuiz();
+          } else {
+            alert("Le fichier JSON n'est pas au bon format (questions[] avec 'question' et 'answers').");
+          }
+        } catch (error) {
+          alert("Impossible de lire le fichier JSON.");
+        }
+      };
+      reader.readAsText(file);
+    });
+  </script>
+</body>
+</html>
